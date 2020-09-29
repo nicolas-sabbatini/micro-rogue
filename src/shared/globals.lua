@@ -4,6 +4,6 @@ FAKE_WIDTH  = 400
 FAKE_HEIGHT = 300
 
 -- Setup fonts
-FONT = love.graphics.newFont('assets/fonts/8-BIT_WONDER.TTF', 8)
-FONT:setFilter('nearest', 'nearest')
-love.graphics.setFont(FONT)
+FONT_SMALL = love.graphics.newFont('assets/fonts/8-BIT_WONDER.TTF', 8)
+FONT_MEDIUM = love.graphics.newFont('assets/fonts/8-BIT_WONDER.TTF', 16)
+FONT_BIG = love.graphics.newFont('assets/fonts/8-BIT_WONDER.TTF', 34)
