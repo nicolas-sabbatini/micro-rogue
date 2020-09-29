@@ -23,4 +23,7 @@ function love.update(dt)
 end
 
 function love.draw()
+  push:start()
+  love.graphics.print('Hola', 10, 10)
+  push:finish()
 end
