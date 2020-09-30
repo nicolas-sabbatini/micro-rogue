@@ -1,6 +1,8 @@
 require './shared/globals'
 
 local push = require './libs/push'
+local Loader = require './components/img-loader'
+local static = require './components/static-map'
 
 -- Push set up
 function love.resize(w, h)
@@ -16,7 +18,11 @@ push:setupScreen(FAKE_WIDTH, FAKE_HEIGHT, REAL_WIDTH, REAL_HEIGHT, {
   })
 --
 
+local help
+
 function love.load()
+  help = Loader.map_quads()
+  static.create_map(help)
 end
 
 function love.update(dt)
@@ -24,6 +30,7 @@ end
 
 function love.draw()
   push:start()
-  love.graphics.print('Hola', 10, 10)
+  static.draw(10, 10, Loader.img)
+  
   push:finish()
 end
