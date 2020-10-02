@@ -21,7 +21,7 @@ push:setupScreen(FAKE_WIDTH, FAKE_HEIGHT, REAL_WIDTH, REAL_HEIGHT, {
 local help
 
 function love.load()
-  help = Loader.map_quads()
+  help = Loader.walls()
   static.create_map(help)
 end
 
@@ -31,6 +31,5 @@ end
 function love.draw()
   push:start()
   static.draw(10, 10, Loader.img)
-  
   push:finish()
 end
