@@ -27,7 +27,7 @@ local map_string = [[
 
 Static.map = {size = {0, 0}, cels = {}}
 
-do
+do -- Generate map from ascii
     local width = #map_string:match("[^\n]+")
     local x = 0
     local y = 0

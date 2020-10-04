@@ -1,8 +1,13 @@
+-- Load globals
 require './shared/globals'
 
+-- Load libs
 local push = require './libs/push'
 local Loader = require './components/img-loader'
 local Map = require './components/map'
+-- Load states
+-- TODO
+
 -- Temp deps
 local static = require './components/static-map'
 
@@ -27,6 +32,7 @@ function love.keypressed(key)
 end
 --
 
+-- tamp variables
 local map_quads, player_quads
 
 function love.load()

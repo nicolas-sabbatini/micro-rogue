@@ -6,6 +6,7 @@ Loader.img = love.graphics.newImage('assets/img/micro-map.png')
 function Loader.walls(x, y, wide, height, table)
     local quads = table or {}
     -- 1
+    -- Load first row
     quads['00001011'] = love.graphics.newQuad(x + (wide * 0), y, wide, height, Loader.img:getDimensions())
     quads['00011111'] = love.graphics.newQuad(x + (wide * 1), y, wide, height, Loader.img:getDimensions())
     quads['00010110'] = love.graphics.newQuad(x + (wide * 2), y, wide, height, Loader.img:getDimensions())
@@ -17,6 +18,7 @@ function Loader.walls(x, y, wide, height, table)
     quads['00011010'] = love.graphics.newQuad(x + (wide * 8), y, wide, height, Loader.img:getDimensions())
     quads['11011011'] = love.graphics.newQuad(x + (wide * 9), y, wide, height, Loader.img:getDimensions())
     -- 2
+    -- Load second row
     quads['01101011'] = love.graphics.newQuad(x + (wide * 0), y + height, wide, height, Loader.img:getDimensions())
     quads['11111111'] = love.graphics.newQuad(x + (wide * 1), y + height, wide, height, Loader.img:getDimensions())
     quads['11010110'] = love.graphics.newQuad(x + (wide * 2), y + height, wide, height, Loader.img:getDimensions())
@@ -28,6 +30,7 @@ function Loader.walls(x, y, wide, height, table)
     quads['11111010'] = love.graphics.newQuad(x + (wide * 8), y + height, wide, height, Loader.img:getDimensions())
     quads['01111110'] = love.graphics.newQuad(x + (wide * 9), y + height, wide, height, Loader.img:getDimensions())
     -- 3
+    -- Load third row
     quads['01101000'] = love.graphics.newQuad(x + (wide *  0), y + (height * 2), wide, height, Loader.img:getDimensions())
     quads['11111000'] = love.graphics.newQuad(x + (wide *  1), y + (height * 2), wide, height, Loader.img:getDimensions())
     quads['11010000'] = love.graphics.newQuad(x + (wide *  2), y + (height * 2), wide, height, Loader.img:getDimensions())
@@ -40,6 +43,7 @@ function Loader.walls(x, y, wide, height, table)
     quads['01011011'] = love.graphics.newQuad(x + (wide *  9), y + (height * 2), wide, height, Loader.img:getDimensions())
     quads['01011110'] = love.graphics.newQuad(x + (wide * 10), y + (height * 2), wide, height, Loader.img:getDimensions())
     -- 4
+    -- Load fourth row
     quads['00001000'] = love.graphics.newQuad(x + (wide *  0), y + (height * 3), wide, height, Loader.img:getDimensions())
     quads['00011000'] = love.graphics.newQuad(x + (wide *  1), y + (height * 3), wide, height, Loader.img:getDimensions())
     quads['00010000'] = love.graphics.newQuad(x + (wide *  2), y + (height * 3), wide, height, Loader.img:getDimensions())
@@ -52,6 +56,7 @@ function Loader.walls(x, y, wide, height, table)
     quads['01111010'] = love.graphics.newQuad(x + (wide *  9), y + (height * 3), wide, height, Loader.img:getDimensions())
     quads['11011010'] = love.graphics.newQuad(x + (wide * 10), y + (height * 3), wide, height, Loader.img:getDimensions())
     -- 5
+    -- Load fifth row
     quads['01001010'] = love.graphics.newQuad(x + (wide * 4), y + (height * 4), wide, height, Loader.img:getDimensions())
     quads['11011110'] = love.graphics.newQuad(x + (wide * 5), y + (height * 4), wide, height, Loader.img:getDimensions())
     quads['01111011'] = love.graphics.newQuad(x + (wide * 6), y + (height * 4), wide, height, Loader.img:getDimensions())
