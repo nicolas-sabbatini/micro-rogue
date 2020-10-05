@@ -14,3 +14,6 @@ FONT_BIG = love.graphics.newFont('assets/fonts/8-BIT_WONDER.TTF', 34)
 
 -- Input table
 KEY_TABLE = {}
+
+-- Utils
+UTILS = {}
