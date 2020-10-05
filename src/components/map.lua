@@ -92,7 +92,6 @@ end
 --- @param img any
 --- @param offset_x integer
 --- @param offset_y integer
---- @param zoom number
 function Map.draw(map, img, offset_x, offset_y)
     map.camera:attach(0, 0, FAKE_WIDTH, FAKE_HEIGHT, true)
     map.camera:lockPosition(offset_x, offset_y)

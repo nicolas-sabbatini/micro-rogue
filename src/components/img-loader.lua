@@ -79,9 +79,10 @@ end
 
 function Loader.player(x, y, wide, height, table)
     local quads = table or {}
-    quads['play'] = {
+    quads['player'] = {
         love.graphics.newQuad( x + (wide * 10), y, wide, height, Loader.img:getDimensions()),
     }
+    return quads
 end
 
 return Loader

@@ -40,7 +40,7 @@ do -- Generate map from ascii
             elseif char == 'A' then
                 Static.map.cels[y][x].type = 'arch'
             elseif char == 'T' then
-                Static.map.cels[y][x].quad = 'trap'
+                Static.map.cels[y][x].type = 'trap'
             else
                 Static.map.cels[y][x].type = 'floor'
             end

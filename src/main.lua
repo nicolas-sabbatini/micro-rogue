@@ -38,7 +38,7 @@ end
 
 -- tamp variables
 local map_quads, player_quads
-local map_x_offset, map_y_offset, map_zoom = 0, 0, 1
+local map_x_offset, map_y_offset, map_zoom = 200, 150, 1
 
 function love.load()
   map_quads = Loader.walls(0, 0, 8, 8)
@@ -65,5 +65,6 @@ function love.draw()
   push:start()
   Map.draw(static.map, Loader.img, math.floor(map_x_offset), math.floor(map_y_offset))
   push:finish()
-  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+
+  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 0, 0)
 end
