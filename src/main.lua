@@ -3,13 +3,10 @@ require './shared/globals'
 
 -- Load libs
 local push = require './libs/push'
-local Loader = require './components/img-loader'
-local Map = require './components/map'
--- Load states
--- TODO
 
--- Temp deps
-local static = require './components/static-map'
+-- Load states
+local Play = require './states/play'
+-- TODO
 
 -- Push set up
 function love.resize(w, h)
@@ -22,49 +19,67 @@ push:setupScreen(FAKE_WIDTH, FAKE_HEIGHT, REAL_WIDTH, REAL_HEIGHT, {
     resizable = true,
   })
 
-function UTILS.screen_to_hump(hump_camera)
-  local x, y = push:toGame(love.mouse.getPosition())
-  x = x or 0
-  y = y or 0
-  return hump_camera:worldCoords(x, y, 0, 0, FAKE_WIDTH, FAKE_HEIGHT)
+--
+
+-- Focus handeling
+function love.focus(f)
+    if not f then
+        IN_FOCUS = false
+    else
+        IN_FOCUS = true
+    end
+end
+--
+
+-- Util functions
+function UTILS.screen_to_hump(hump_camera, width, height)
+    local x, y = push:toGame(love.mouse.getPosition())
+    x = x or 0
+    y = y or 0
+    return hump_camera:worldCoords(x, y, 0, 0, width, height)
+end
+
+function UTILS.get_mouse_position()
+    local x, y = love.mouse.getPosition()
+    local p_x, p_y = push:toGame(x, y)
+    if not p_x and x < REAL_WIDTH/2 then p_x = 0 end
+    if not p_x and x > REAL_WIDTH/2 then p_x = FAKE_WIDTH end
+    if not p_y and y < REAL_HEIGHT/2 then p_y = 0 end
+    if not p_y and y > REAL_HEIGHT/2 then p_y = FAKE_HEIGHT end
+    if IN_FOCUS then
+        return p_x, p_y
+    end
+    return nil, nil
+end
+
+function love.wheelmoved(x, y)
+    Play.wheelmoved(x, y)
 end
 --
 
 -- Set up imputs
 function love.keypressed(key)
-  KEY_TABLE[key] = true
+    KEY_TABLE[key] = true
 end
 --
 
--- tamp variables
-local map_quads, player_quads
-local map_x_offset, map_y_offset, map_zoom = 200, 150, 1
-
 function love.load()
-  map_quads = Loader.walls(0, 0, 8, 8)
-  map_quads = Loader.extras(0, 0, 8, 8, map_quads)
-  player_quads = Loader.player(0, 0, 8, 8)
-  Map.set_tiles(static.map, map_quads)
-  Map.create_camera(static.map, map_x_offset, map_y_offset, map_zoom)
+    Play.load()
 end
 
 function love.update(dt)
-  if KEY_TABLE['escape'] then love.event.quit() end
-
-  if love.keyboard.isDown('w') then  map_y_offset = map_y_offset + ( 100 * dt) end
-  if love.keyboard.isDown('s') then  map_y_offset = map_y_offset + (-100 * dt) end
-  if love.keyboard.isDown('a') then  map_x_offset = map_x_offset + ( 100 * dt) end
-  if love.keyboard.isDown('d') then  map_x_offset = map_x_offset + (-100 * dt) end
-  if love.keyboard.isDown('.') then  map_zoom = map_zoom + (0.15 * dt); static.map.camera:zoomTo(map_zoom) end
-  if love.keyboard.isDown(',') then  map_zoom = map_zoom - (0.15 * dt); static.map.camera:zoomTo(map_zoom) end
-
-  KEY_TABLE = {}
+    if KEY_TABLE['escape'] then love.event.quit() end
+    Play.update(dt)
+    KEY_TABLE = {}
 end
 
 function love.draw()
-  push:start()
-  Map.draw(static.map, Loader.img, math.floor(map_x_offset), math.floor(map_y_offset))
-  push:finish()
+    push:start()
+    love.graphics.setColor(0.1,0.1,0.1)
+    love.graphics.rectangle('fill', 0, 0, FAKE_WIDTH, FAKE_HEIGHT)
+    love.graphics.setColor(1,1,1)
+    Play.draw()
+    push:finish()
 
-  love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 0, 0)
+    love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 0, 0)
 end

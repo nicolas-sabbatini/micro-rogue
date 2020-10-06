@@ -1,8 +1,6 @@
 local Map = {}
 Map.__index = Map
 
-local Camera = require 'libs.camera'
-
 --- Find index family
 --- @param index any
 --- @param quads any
@@ -83,26 +81,19 @@ function Map.set_tiles(map, quads)
     end
 end
 
-function Map.create_camera(map, offset_x, offset_y, zoom)
-    map.camera = Camera.new(offset_x, offset_y, zoom, 0, Camera.smooth.damped(10))
-end
-
 --- Draws a map
 --- @param map any
 --- @param img any
 --- @param offset_x integer
 --- @param offset_y integer
 function Map.draw(map, img, offset_x, offset_y)
-    map.camera:attach(0, 0, FAKE_WIDTH, FAKE_HEIGHT, true)
-    map.camera:lockPosition(offset_x, offset_y)
     local limit_y = map.size[2]
     local limit_x = map.size[1]
     for y=0, limit_y do
         for x=0, limit_x do
-            love.graphics.draw(img, map.cels[y][x].quad, 8 * x, 8 * y)
+            love.graphics.draw(img, map.cels[y][x].quad, 8 * x + offset_x, 8 * y + offset_y)
         end
     end
-    map.camera:detach()
 end
 
 return Map

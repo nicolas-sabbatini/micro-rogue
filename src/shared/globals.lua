@@ -17,3 +17,6 @@ KEY_TABLE = {}
 
 -- Utils
 UTILS = {}
+
+-- Focus
+IN_FOCUS = false
