@@ -14,17 +14,18 @@ function love.resize(w, h)
 end
 
 function love.focus(f)
-	if not f then
-		IN_FOCUS = false
-	else
-		IN_FOCUS = true
-	end
+	IN_FOCUS = f
 end
+
+function love.update(dt) end
 
 function love.draw()
 	love.graphics.clear(0.0, 0.0, 0.0)
 	PUSH:start()
 	love.graphics.clear(0.1, 0.1, 0.1)
+	-- Draw UI
+	ATTACH_GAME_CAMERA()
+	-- Draw game
+	DETACH_GAME_CAMERA()
 	PUSH:finish()
-	love.graphics.print("Current FPS: " .. tostring(love.timer.getFPS()), 0, 0)
 end
