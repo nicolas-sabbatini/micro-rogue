@@ -40,22 +40,25 @@ function GET_MOUSE_POSITION()
 	return p_x, p_y
 end
 
--- Game camera settings
+-- Camera
 local camera = require("vendors.camera")
-GAME_CAMERA = camera.new(GAME_WIDTH / 2, GAME_HEIGHT / 2)
 
-function SCREEN_TO_GAME_CAMERA()
+function SCREEN_TO_GAME_CAMERA(cam)
 	if not IN_FOCUS then
 		return nil, nil
 	end
 	local x, y = GET_MOUSE_POSITION()
-	return GAME_CAMERA:worldCoords(x, y, 0, 0, GAME_WIDTH, GAME_HEIGHT)
+	return cam:worldCoords(x, y, 0, 0, GAME_WIDTH, GAME_HEIGHT)
 end
 
-function ATTACH_GAME_CAMERA()
-	GAME_CAMERA:attach(0, 0, GAME_WIDTH, GAME_HEIGHT, true)
+function ATTACH_GAME_CAMERA(cam)
+	cam:attach(0, 0, GAME_WIDTH, GAME_HEIGHT, true)
 end
 
-function DETACH_GAME_CAMERA()
-	GAME_CAMERA:detach()
+function DETACH_GAME_CAMERA(cam)
+	cam:detach()
+end
+
+function NEW_CAMERA()
+	return camera.new(GAME_WIDTH / 2, GAME_HEIGHT / 2)
 end

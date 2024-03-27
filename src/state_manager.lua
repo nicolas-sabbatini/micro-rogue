@@ -1,6 +1,6 @@
 --- @class State
 --- @field enter function
---- @field update fun(self: State, dt: number): Commands, nil | State | number
+--- @field update fun(self: State, dt: number): Commands, nil | State | number, nil | number
 --- @field update_pause fun(self: State, dt: number)
 --- @field draw function
 --- @field draw_pause function
@@ -37,8 +37,8 @@ local commands = {
 	POP = function(state_manager, amount)
 		state_manager:pop(amount)
 	end,
-	POP_REPLEASE = function(state_manager, state)
-		state_manager:pop(1)
+	POP_REPLEASE = function(state_manager, state, amount)
+		state_manager:pop(amount or 1)
 		state_manager:push(state)
 	end,
 	QUIT = function(state_manager)
@@ -70,8 +70,8 @@ function StateManager:update(dt)
 	for i = 1, self.stack_size - 1 do
 		self.stack[i]:update_pause(dt)
 	end
-	local command, input = self.stack[self.stack_size]:update(dt)
-	commands[command](self, input)
+	local command, v1, v2 = self.stack[self.stack_size]:update(dt)
+	commands[command](self, v1, v2)
 end
 
 function StateManager:draw()

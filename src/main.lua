@@ -11,7 +11,6 @@ function love.load()
 		fullscreen = false,
 		resizable = true,
 	})
-
 	app_state:push(play_state)
 end
 
