@@ -1,4 +1,8 @@
 require("globals")
+require("state_manager")
+local play_state = require("play_state.play")
+
+local app_state = CREATE_NEW_STATE_MANAGER("App state manager")
 
 function love.load()
 	love.graphics.setDefaultFilter("nearest", "nearest")
@@ -7,6 +11,8 @@ function love.load()
 		fullscreen = false,
 		resizable = true,
 	})
+
+	app_state:push(play_state)
 end
 
 function love.resize(w, h)
@@ -17,15 +23,14 @@ function love.focus(f)
 	IN_FOCUS = f
 end
 
-function love.update(dt) end
+function love.update(dt)
+	app_state:update(dt)
+end
 
 function love.draw()
 	love.graphics.clear(0.0, 0.0, 0.0)
 	PUSH:start()
+	app_state:draw()
 	love.graphics.clear(0.1, 0.1, 0.1)
-	-- Draw UI
-	ATTACH_GAME_CAMERA()
-	-- Draw game
-	DETACH_GAME_CAMERA()
 	PUSH:finish()
 end
